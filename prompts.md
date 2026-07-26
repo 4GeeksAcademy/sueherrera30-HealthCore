@@ -62,5 +62,6 @@ Actua como un desarrollador de software experto en frontend - Utiliza las mejore
 - Accesibilidad Aplica buenas prácticas estrictas. Usa <label for> vinculados a los id, <fieldset> y <legend> para los radio buttons, y textos ocultos con .sr-only junto con atributos aria-\* para lectores de pantalla.
 - Bilingüe (ES/EN): Implementa un botón para cambiar el idioma entre Español e Inglés al instante sin recargar la página, usando atributos data-es y data-en sacando información del contexto.
 - Lógica JS Condicional: Muestra campos adicionales solo si es necesario (ej: pedir "Aseguradora" solo si marcan "Sí tengo seguro").
+- Agrega un boton que limpie los campos del formulario.
 - Validaciones: El campo de fecha no debe permitir fechas pasadas. El campo de "motivo de consulta" debe tener un contador de caracteres en tiempo real.
 - Simulación de Envío: Al enviar, oculta el formulario y muestra una tarjeta atractiva de "Éxito" (Success Screen) agradeciendo al usuario, con un botón para resetear el formulario.
