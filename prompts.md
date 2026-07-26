@@ -40,6 +40,7 @@ Actua como un desarrollador de software experto en frontend - Utiliza las mejore
 6. Utiliza font google sans
 
 **[DESARROLLO]**
+
 **landing page:**
 
 - Crea Landing page en index.html, usando html semantico, tailwind y considerando accesibilidad, considerando los criterios señalados en la sección de diseño y todo el contenido proveido por el contexto.es.md - contemplando estas secciones:
@@ -64,3 +65,6 @@ Actua como un desarrollador de software experto en frontend - Utiliza las mejore
 - Lógica JS Condicional: Muestra campos adicionales solo si es necesario (ej: pedir "Aseguradora" solo si marcan "Sí tengo seguro").
 - Validaciones: El campo de fecha no debe permitir fechas pasadas. El campo de "motivo de consulta" debe tener un contador de caracteres en tiempo real.
 - Simulación de Envío: Al enviar, oculta el formulario y muestra una tarjeta atractiva de "Éxito" (Success Screen) agradeciendo al usuario, con un botón para resetear el formulario.
+
+  deploy: https://sueherrera30-health-core.vercel.app/
+  
