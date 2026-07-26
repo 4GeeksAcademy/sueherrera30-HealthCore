@@ -1,0 +1,228 @@
+/* Fixed gradient background to prevent repeating or cutting off */
+.bg-gradient-fixed {
+  background: #cff0ea;
+  background: linear-gradient(
+    148deg,
+    rgba(207, 240, 234, 1) 0%,
+    rgba(255, 255, 255, 1) 37%,
+    rgba(255, 255, 255, 1) 60%,
+    rgba(255, 255, 255, 1) 65%,
+    rgba(255, 255, 255, 1) 69%,
+    rgba(255, 255, 255, 1) 53%,
+    rgba(62, 155, 148, 0.82) 100%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Glassmorphism & Relief utility classes */
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #3e9b94;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(62, 155, 148, 0.3);
+}
+
+/* Smooth section transitions */
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile menu transition */
+#mobile-menu.open {
+  transform: translateX(0);
+}
+
+/* Make mobile menu readable even if utility classes fail */
+#mobile-menu {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+#mobile-menu a,
+#mobile-menu button {
+  color: #722f37 !important;
+}
+
+#mobile-menu a {
+  font-weight: 800;
+  text-shadow: none;
+}
+
+#mobile-menu button:hover,
+#mobile-menu a:hover {
+  color: #5d252c !important;
+}
+
+#mobile-menu #mob-lang-en,
+#mobile-menu #mob-lang-es {
+  border: 1px solid rgba(114, 47, 55, 0.22);
+}
+
+#mobile-menu #mob-lang-es {
+  background: rgba(114, 47, 55, 0.14) !important;
+}
+
+/* Improve readability when source logo has transparent padding */
+.logo-tight {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Footer fallback to preserve intended dark theme */
+#contact {
+  background: #0c3b45;
+  color: #cff0ea;
+  border-top: 4px solid #3e9b94;
+}
+
+#contact a {
+  color: #d9f3ef;
+}
+
+#contact a:hover {
+  color: #ffffff;
+}
+
+/* Enhanced location table styling */
+.locations-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.locations-table thead th {
+  background: linear-gradient(180deg, rgba(207, 240, 234, 0.95), rgba(186, 228, 222, 0.95));
+  color: #0c3b45;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+}
+
+.locations-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.locations-table tbody tr:nth-child(even) {
+  background: rgba(245, 252, 250, 0.92);
+}
+
+.locations-table tbody tr:hover {
+  background: rgba(207, 240, 234, 0.7);
+}
+
+.locations-table td,
+.locations-table th {
+  border-bottom: 1px solid rgba(62, 155, 148, 0.18);
+}
+
+.locations-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+       body {
+            background-color: #f8fafc;
+            /* Patrón de fondo sutil y colorido */
+            background-image: radial-gradient(#14b8a6 0.5px, transparent 0.5px), radial-gradient(#8b5cf6 0.5px, #f8fafc 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            background-attachment: fixed;
+        }
+        
+        .form-input {
+            width: 100%;
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 0.75rem 1rem;
+            color: #334155;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #14b8a6;
+            box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        .section-card {
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            transition: transform 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilo para los radio buttons */
+        input[type="radio"] {
+            accent-color: #14b8a6;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        input[type="checkbox"] {
+            accent-color: #14b8a6;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .submit-btn {
+          background-color: #1e3a8a;
+          box-shadow: 0 10px 24px rgba(30, 58, 138, 0.32);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+          background-color: #172554;
+          transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+          background-color: #94a3b8;
+          cursor: not-allowed;
+          box-shadow: none;
+          transform: none;
+          opacity: 0.9;
+        }

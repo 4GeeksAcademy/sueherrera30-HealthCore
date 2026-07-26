@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Form</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "HealthCore Application Form",
+        "url": "https://www.healthcore.com/application",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "HealthCore",
+          "url": "https://www.healthcore.com"
+        }
+      }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind.config.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+    <body class="m-4 bg-gradient-fixed text-primary-500 font-sans min-h-screen relative overflow-x-hidden selection:bg-primary-300 selection:text-white">
+    <main id="view-application" class="max-w-4xl mx-auto fade-in">
+        
+        <!-- Header Superior -->
+        <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+            <div>
+                <a href="index.html" class="inline-flex items-center gap-2 text-slate-500 hover:text-brand-500 font-bold transition-colors mb-2 bg-slate-100 hover:bg-brand-50 px-4 py-2 rounded-full text-sm">
+                    <span>🔙</span> <span data-es="Volver al inicio" data-en="Back to home">Volver al inicio</span>
+                </a>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-800 tracking-tight flex items-center gap-3 mt-2">
+                    <span class="text-4xl">🏥</span> 
+                    <span data-es="Solicitud de Cita" data-en="Appointment Request">Solicitud de Cita</span>
+                </h1>
+                <p class="text-slate-500 mt-2 font-medium" data-es="✨ Completa tus datos y nuestro equipo te contactará para confirmar." data-en="✨ Fill in your details and our team will contact you to confirm.">
+                    ✨ Completa tus datos y nuestro equipo te contactará para confirmar.
+                </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <!-- Selector de Idioma -->
+                <div class="flex items-center gap-1 bg-slate-100 p-1.5 rounded-full border border-slate-200">
+                    <button id="btn-es" type="button" onclick="changeLanguage('es')" class="px-4 py-1.5 rounded-full text-sm font-bold bg-brand-500 text-white shadow-sm transition-all">ES</button>
+                    <button id="btn-en" type="button" onclick="changeLanguage('en')" class="px-4 py-1.5 rounded-full text-sm font-bold bg-slate-200 text-slate-600 hover:bg-slate-300 transition-all">EN</button>
+                </div>
+
+                <div class="bg-brand-50 text-brand-600 p-4 rounded-2xl font-bold flex items-center gap-3 border border-brand-100 hidden sm:flex">
+                    <span class="text-2xl">👩‍⚕️</span>
+                    <div>
+                        <p class="text-sm text-brand-500 font-semibold uppercase tracking-wider">HealthCore</p>
+                        <p class="text-lg leading-tight">Care Center</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario -->
+        <form id="patient-form" class="space-y-6" novalidate>
+            
+            <fieldset class="section-card bg-blue-50/80 backdrop-blur-sm border-blue-100">
+                <legend class="text-xl font-bold text-blue-700 mb-4 flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full inline-flex">
+                    👤 <span data-es="Información Personal" data-en="Personal Information">Información Personal</span>
+                </legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                    <div>
+                        <label for="first_name" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Nombre" data-en="First Name">Nombre</span> 📝 <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <input type="text" id="first_name" name="first_name" required aria-required="true" class="form-input" data-ph-es="Ej. Ana" data-ph-en="e.g., Anna" placeholder="Ej. Ana">
+                    </div>
+                    <div>
+                        <label for="last_name" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Apellido" data-en="Last Name">Apellido</span> 📝 <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <input type="text" id="last_name" name="last_name" required aria-required="true" class="form-input" data-ph-es="Ej. García" data-ph-en="e.g., Smith" placeholder="Ej. García">
+                    </div>
+                    <div>
+                        <label for="date_of_birth" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Fecha de nacimiento" data-en="Date of Birth">Fecha de nacimiento</span> 🎂 <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <input type="date" id="date_of_birth" name="date_of_birth" required aria-required="true" class="form-input text-slate-500">
+                    </div>
+                    <div>
+                        <label for="preferred_language" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Idioma preferido" data-en="Preferred Language">Idioma preferido</span> 🗣️ <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <select id="preferred_language" name="preferred_language" required aria-required="true" class="form-input font-medium cursor-pointer">
+                            <option value="" disabled selected data-es="Selecciona un idioma..." data-en="Select a language...">Selecciona un idioma...</option>
+                            <option value="Español" data-es="🇪🇸 Español" data-en="🇪🇸 Spanish">🇪🇸 Español</option>
+                            <option value="English" data-es="🇺🇸 English" data-en="🇺🇸 English">🇺🇸 English</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="section-card bg-emerald-50/80 backdrop-blur-sm border-emerald-100">
+                <legend class="text-xl font-bold text-emerald-700 mb-4 flex items-center gap-2 px-4 py-2 bg-emerald-100 rounded-full inline-flex">
+                    📞 <span data-es="Contacto" data-en="Contact Details">Contacto</span>
+                </legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                    <div>
+                        <label for="email" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Correo electrónico" data-en="Email Address">Correo electrónico</span> 📧 <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <input type="email" id="email" name="email" required aria-required="true" class="form-input" data-ph-es="hola@ejemplo.com" data-ph-en="hello@example.com" placeholder="hola@ejemplo.com">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Número de teléfono" data-en="Phone Number">Número de teléfono</span> 📱 <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <input type="tel" id="phone" name="phone" required aria-required="true" class="form-input" data-ph-es="+1 (555) 000-0000" data-ph-en="+1 (555) 000-0000" placeholder="+1 (555) 000-0000">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="section-card bg-purple-50/80 backdrop-blur-sm border-purple-100">
+                <legend class="text-xl font-bold text-purple-700 mb-4 flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full inline-flex">
+                    🗓️ <span data-es="Detalles de la Cita" data-en="Appointment Details">Detalles de la Cita</span>
+                </legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                    <div>
+                        <label for="preferred_clinic" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Clínica preferida" data-en="Preferred Clinic">Clínica preferida</span> 🏥 <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <select id="preferred_clinic" name="preferred_clinic" required aria-required="true" class="form-input cursor-pointer">
+                            <option value="" disabled selected data-es="Selecciona una sede..." data-en="Select a location...">Selecciona una sede...</option>
+                            <option value="Austin Central">📍 Austin Central</option>
+                            <option value="Austin North">📍 Austin North</option>
+                            <option value="San Antonio">📍 San Antonio</option>
+                            <option value="Miami">📍 Miami</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="service_type" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Servicio requerido" data-en="Required Service">Servicio requerido</span> 🩺 <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <select id="service_type" name="service_type" required aria-required="true" class="form-input cursor-pointer">
+                            <option value="" disabled selected data-es="Selecciona un servicio..." data-en="Select a service...">Selecciona un servicio...</option>
+                            <option value="Primary Care" data-es="👨‍⚕️ Medicina General" data-en="👨‍⚕️ Primary Care">👨‍⚕️ Medicina General</option>
+                            <option value="Specialist" data-es="🔍 Especialista" data-en="🔍 Specialist">🔍 Especialista</option>
+                            <option value="Pediatrics" data-es="🧸 Pediatría" data-en="🧸 Pediatrics">🧸 Pediatría</option>
+                            <option value="Mental Health" data-es="🧠 Salud Mental" data-en="🧠 Mental Health">🧠 Salud Mental</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="preferred_date" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Fecha preferida" data-en="Preferred Date">Fecha preferida</span> 📅 <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <input type="date" id="preferred_date" name="preferred_date" required aria-required="true" class="form-input text-slate-500">
+                    </div>
+                    <div>
+                        <label for="preferred_time" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Franja horaria preferida" data-en="Preferred Time Slot">Franja horaria preferida</span> ⏰ <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <select id="preferred_time" name="preferred_time" required aria-required="true" class="form-input cursor-pointer">
+                            <option value="" disabled selected data-es="Selecciona un horario..." data-en="Select a time...">Selecciona un horario...</option>
+                            <option value="Morning" data-es="🌅 Mañana (7am - 12pm)" data-en="🌅 Morning (7am - 12pm)">🌅 Mañana (7am - 12pm)</option>
+                            <option value="Afternoon" data-es="☀️ Tarde (12pm - 5pm)" data-en="☀️ Afternoon (12pm - 5pm)">☀️ Tarde (12pm - 5pm)</option>
+                            <option value="Evening" data-es="🌇 Noche (5pm - 8pm)" data-en="🌇 Evening (5pm - 8pm)">🌇 Noche (5pm - 8pm)</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="section-card bg-amber-50/80 backdrop-blur-sm border-amber-100">
+                <legend class="text-xl font-bold text-amber-700 mb-4 flex items-center gap-2 px-4 py-2 bg-amber-100 rounded-full inline-flex">
+                    📋 <span data-es="Historial y Seguro Médico" data-en="History & Insurance">Historial y Seguro</span>
+                </legend>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-2">
+                    <fieldset class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+                        <legend class="block text-base font-bold text-slate-700 mb-3 w-full">
+                            <span data-es="¿Es tu primera visita a HealthCore?" data-en="Is this your first visit to HealthCore?">¿Es tu primera visita a HealthCore?</span> ✨ <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </legend>
+                        <div class="flex gap-6">
+                            <label for="new_patient_yes" class="flex items-center gap-2 cursor-pointer bg-amber-50 px-4 py-2 rounded-xl hover:bg-amber-100 transition-colors">
+                                <input type="radio" id="new_patient_yes" name="new_patient" value="Yes" required aria-required="true" onchange="togglePatientId(this.value)"> 
+                                <span class="font-bold"><span data-es="Sí" data-en="Yes">Sí</span> ✅</span>
+                            </label>
+                            <label for="new_patient_no" class="flex items-center gap-2 cursor-pointer bg-amber-50 px-4 py-2 rounded-xl hover:bg-amber-100 transition-colors">
+                                <input type="radio" id="new_patient_no" name="new_patient" value="No" required aria-required="true" onchange="togglePatientId(this.value)"> 
+                                <span class="font-bold"><span data-es="No" data-en="No">No</span> 🔁</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                    
+                    <div id="patient_id_container" class="hidden fade-in bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+                        <label for="patient_id" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="ID de Paciente" data-en="Patient ID">ID de Paciente</span> 🪪 <span class="text-slate-500 font-normal" data-es="(Opcional)" data-en="(Optional)">(Opcional)</span>
+                        </label>
+                        <input type="text" id="patient_id" name="patient_id" data-ph-es="Ej. HC-A3F291" data-ph-en="e.g. HC-A3F291" placeholder="Ej. HC-A3F291" class="form-input uppercase">
+                    </div>
+                </div>
+
+                <fieldset class="mt-6 bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+                    <legend class="block text-base font-bold text-slate-700 mb-3 w-full">
+                        <span data-es="¿Tienes seguro médico?" data-en="Do you have health insurance?">¿Tienes seguro médico?</span> 🛡️ <span class="text-red-500" aria-hidden="true">*</span>
+                        <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                    </legend>
+                    <div class="flex gap-6">
+                        <label for="insurance_yes" class="flex items-center gap-2 cursor-pointer bg-amber-50 px-4 py-2 rounded-xl hover:bg-amber-100 transition-colors">
+                            <input type="radio" id="insurance_yes" name="has_insurance" value="Yes" required aria-required="true" onchange="toggleInsurance(this.value)"> 
+                            <span class="font-bold"><span data-es="Sí" data-en="Yes">Sí</span> ✅</span>
+                        </label>
+                        <label for="insurance_no" class="flex items-center gap-2 cursor-pointer bg-amber-50 px-4 py-2 rounded-xl hover:bg-amber-100 transition-colors">
+                            <input type="radio" id="insurance_no" name="has_insurance" value="No" required aria-required="true" onchange="toggleInsurance(this.value)"> 
+                            <span class="font-bold"><span data-es="No" data-en="No">No</span> ❌</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div id="insurance_details" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 hidden fade-in bg-white p-6 rounded-2xl border-2 border-amber-200">
+                    <div>
+                        <label for="insurance_provider" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="Aseguradora" data-en="Insurance Provider">Aseguradora</span> 🏢
+                        </label>
+                        <input type="text" id="insurance_provider" name="insurance_provider" class="form-input" data-ph-es="Nombre de tu seguro" data-ph-en="Insurance name" placeholder="Nombre de tu seguro">
+                    </div>
+                    <div>
+                        <label for="insurance_member_id" class="block text-sm font-bold text-slate-700 mb-2">
+                            <span data-es="ID de afiliado" data-en="Member ID">ID de afiliado</span> 🔢
+                        </label>
+                        <input type="text" id="insurance_member_id" name="insurance_member_id" class="form-input" data-ph-es="Número de póliza" data-ph-en="Policy number" placeholder="Número de póliza">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="section-card bg-rose-50/80 backdrop-blur-sm border-rose-100">
+                <legend class="text-xl font-bold text-rose-700 mb-4 flex items-center gap-2 px-4 py-2 bg-rose-100 rounded-full inline-flex">
+                    ❤️ <span data-es="Motivo de la Consulta" data-en="Health Concern">Motivo de la Consulta</span>
+                </legend>
+                <div class="mt-2">
+                    <div class="flex justify-between items-end mb-2">
+                        <label for="health_concern" class="block text-sm font-bold text-slate-700">
+                            <span data-es="Descripción breve de tu necesidad médica" data-en="Brief description of your health concern">Descripción breve de tu necesidad médica</span> ✍️ <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <span class="text-sm font-bold bg-white px-2 py-1 rounded-lg text-slate-400" aria-live="polite" id="char_count_container"><span id="char_count" class="text-brand-500">0</span>/500</span>
+                    </div>
+                    <textarea id="health_concern" name="health_concern" rows="4" maxlength="500" required aria-required="true" aria-describedby="char_count_container" class="form-input resize-none w-[90%] mx-4" data-ph-es="Cuéntanos cómo podemos ayudarte..." data-ph-en="Tell us how we can help you..." placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
+                </div>
+                
+                <div class="mt-6 flex items-start gap-4 bg-white p-5 rounded-2xl border-2 border-rose-100 cursor-pointer hover:bg-rose-50/50 transition-colors" onclick="document.getElementById('contact_consent').click()">
+                    <input type="checkbox" id="contact_consent" name="contact_consent" required aria-required="true" aria-describedby="consent_desc" class="mt-1" onclick="event.stopPropagation()">
+                    <div>
+                        <label for="contact_consent" class="text-base font-bold text-slate-700 cursor-pointer select-none">
+                            <span data-es="Consiento que HealthCore me contacte" data-en="I consent to HealthCore contacting me">Consiento que HealthCore me contacte</span> 🤝 <span class="text-red-500" aria-hidden="true">*</span>
+                            <span class="sr-only" data-es="(Requerido)" data-en="(Required)">(Requerido)</span>
+                        </label>
+                        <p class="text-sm text-slate-500 mt-1" id="consent_desc" data-es="Autorizo el uso de mis datos para agendar esta cita." data-en="I authorize the use of my data to schedule this appointment.">Autorizo el uso de mis datos para agendar esta cita.</p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="bg-indigo-50 rounded-2xl p-4 text-sm text-indigo-700 border border-indigo-100 flex items-start gap-3">
+                <span class="text-xl">💡</span>
+                <p data-es="¿Eres un proveedor de salud u organización que busca asociarse con HealthCore? Contacta a nuestro equipo en <strong>partnerships@healthcore.com</strong>" data-en="Are you a healthcare provider or organization looking to partner with HealthCore? Contact our team at <strong>partnerships@healthcore.com</strong>">¿Eres un proveedor de salud u organización que busca asociarse con HealthCore? Contacta a nuestro equipo en <strong>partnerships@healthcore.com</strong></p>
+            </div>
+
+            <button id="submit-button" type="submit" class="submit-btn w-full text-white font-black text-xl px-8 py-5 rounded-2xl transition-all duration-300 transform flex items-center justify-center gap-3">
+                <span id="submit_btn_text" data-es="Enviar Solicitud de Cita" data-en="Submit Appointment Request">Enviar Solicitud de Cita</span> <span class="text-2xl">🚀</span>
+            </button>
+        </form>
+    </main>
+            
+    <!-- Success Message State (Hidden initially) -->
+    <div id="success-container" class="hidden max-w-2xl mx-auto mt-10 bg-white rounded-3xl p-10 md:p-16 shadow-xl border border-green-100 text-center fade-in relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-4 bg-green-400"></div>
+        <div class="absolute -top-20 -right-20 w-40 h-40 bg-green-50 rounded-full blur-2xl"></div>
+        
+        <div class="w-24 h-24 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner text-5xl relative z-10 border-4 border-white shadow-lg">
+            🎉
+        </div>
+        
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4 relative z-10" data-es="¡Solicitud Enviada!" data-en="Request Submitted!">¡Solicitud Enviada!</h2>
+        <h3 class="text-xl font-bold text-green-600 mb-6 relative z-10">
+            <span data-es="Gracias por contactar a HealthCore" data-en="Thank you for contacting HealthCore">Gracias por contactar a HealthCore</span> 🏥
+        </h3>
+        
+        <div class="text-slate-600 space-y-4 text-lg bg-slate-50 p-6 rounded-2xl border border-slate-100 relative z-10">
+            <p data-es="Hemos recibido tu consulta con éxito. Un miembro de nuestro equipo se pondrá en contacto contigo <strong>dentro de 1 día hábil</strong> para confirmar los detalles." data-en="We have successfully received your inquiry. A member of our team will contact you <strong>within 1 business day</strong> to confirm the details.">
+                Hemos recibido tu consulta con éxito. Un miembro de nuestro equipo se pondrá en contacto contigo <strong>dentro de 1 día hábil</strong> para confirmar los detalles.
+            </p>
+            <p data-es="Si necesitas asistencia urgente 🚨, llama directamente a tu clínica preferida usando los números de nuestro sitio web." data-en="If you need urgent assistance 🚨, please call your preferred clinic directly using the numbers on our website.">
+                Si necesitas asistencia urgente 🚨, llama directamente a tu clínica preferida usando los números de nuestro sitio web.
+            </p>
+            <p class="font-bold text-brand-600 pt-2" data-es="¡Esperamos poder atenderte pronto! ✨" data-en="We look forward to serving you soon! ✨">
+                ¡Esperamos poder atenderte pronto! ✨
+            </p>
+        </div>
+        
+        <button onclick="resetForm()" class="mt-10 bg-white border-2 border-slate-200 text-slate-600 font-bold px-8 py-4 rounded-full hover:bg-slate-50 hover:text-brand-500 hover:border-brand-300 transition-all shadow-sm relative z-10 flex items-center justify-center gap-2 mx-auto">
+            <span data-es="Volver y enviar otra consulta" data-en="Go back and submit another inquiry">Volver y enviar otra consulta</span> <span>🔄</span>
+        </button>
+    </div>
+    <script src="validation.js"></script>
+  </body>
+</html>
