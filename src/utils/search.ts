@@ -1,33 +1,26 @@
-import { Paciente } from '../types/models';
+import { Claim, Clinician } from '../types/models';
 
-// lineal
-export const buscarPacientePorNombre = (pacientes: Paciente[], nombreParcial: string): Paciente | null => {
-  if (pacientes.length === 0) return null;
-  const pacienteEncontrado = pacientes.find((p) => 
-    p.nombreCompleto.toLowerCase().includes(nombreParcial.toLowerCase())
-  );
-  return pacienteEncontrado || null;
+export const findClaimById = (claims: Claim[], claimId: string): Claim | null => {
+  return claims.find((c) => c.claimId === claimId) || null;
 };
 
-// binaria
-export const buscarIndicePacientePorId = (pacientesOrdenados: Paciente[], idBuscado: string): number => {
-  if (pacientesOrdenados.length === 0) return -1;
+export const findClinicianById = (clinicians: Clinician[], clinicianId: string): Clinician | null => {
+  return clinicians.find((c) => c.clinicianId === clinicianId) || null;
+};
 
-  let inicio = 0;
-  let fin = pacientesOrdenados.length - 1;
+export const binarySearchClaimById = (sortedClaims: Claim[], targetId: string): number => {
+  let left = 0;
+  let right = sortedClaims.length - 1;
 
-  while (inicio <= fin) {
-    const medio = Math.floor((inicio + fin) / 2);
-    const pacienteMedio = pacientesOrdenados[medio];
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const midId = sortedClaims[mid].claimId;
 
-    if (pacienteMedio.id === idBuscado) {
-      return medio;
-    }
-
-    if (pacienteMedio.id < idBuscado) {
-      inicio = medio + 1;
+    if (midId === targetId) return mid;
+    if (midId < targetId) {
+      left = mid + 1;
     } else {
-      fin = medio - 1;
+      right = mid - 1;
     }
   }
 

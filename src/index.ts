@@ -1,34 +1,24 @@
-import { Paciente, Cita, Reclamacion } from './types/models';
-import { buscarPacientePorNombre, buscarIndicePacientePorId } from './utils/search';
-import { validarReclamacionEEUU } from './utils/validations';
-import { filtrarCitasPorEstado } from './utils/collections';
-import { calcularTasaNoShows, sumarPerdidasPorRechazos } from './utils/transformations';
+import { Claim, Appointment } from './types/models';
+import { calculateDenialRate, flagHighDenialPayers, flagHighNoShowLocations } from './utils/transformations';
+import { validateClaim } from './utils/validations';
+import { filterClaims } from './utils/collections';
 
-// Datos de prueba (Mocks)
-const pacientesMock: Paciente[] = [
-  { id: 'PAC-001', nombreCompleto: 'Juan Pérez', jurisdiccion: 'HIPAA' },
-  { id: 'PAC-002', nombreCompleto: 'Ana Smith', jurisdiccion: 'UK_GDPR' },
-  { id: 'PAC-003', nombreCompleto: 'Carlos Ruiz', jurisdiccion: 'HIPAA' }
+// datos 
+const sampleClaims: Claim[] = [
+  { claimId: "CLM-000001", patientId: "HC-A3F291", locationId: "us-tx-001", serviceType: "primary_care", payerName: "BlueCross", payerId: "BC001", submissionDate: "2025-03-10", claimAmount: 180, status: "approved", resubmitted: false },
+  { claimId: "CLM-000002", patientId: "HC-B7K442", locationId: "us-fl-001", serviceType: "specialist", payerName: "Aetna", payerId: "AET002", submissionDate: "2025-03-11", claimAmount: 340, status: "denied", denialReason: "missing_authorisation", resubmitted: false },
+  { claimId: "CLM-000004", patientId: "HC-D9P553", locationId: "us-tx-001", serviceType: "preventive", payerName: "BlueCross", payerId: "BC001", submissionDate: "2025-03-13", claimAmount: 150, status: "denied", denialReason: "coding_error", resubmitted: true }
 ];
 
-const citasMock: Cita[] = [
-  { id: 'CIT-1', pacienteId: 'PAC-001', clinicaId: 'US-01', fecha: new Date(), estado: 'completada' },
-  { id: 'CIT-2', pacienteId: 'PAC-002', clinicaId: 'UK-01', fecha: new Date(), estado: 'no-show' },
-  { id: 'CIT-3', pacienteId: 'PAC-003', clinicaId: 'US-02', fecha: new Date(), estado: 'no-show' }
+const sampleAppointments: Appointment[] = [
+  { appointmentId: "APT-000001", patientId: "HC-A3F291", locationId: "us-tx-001", serviceType: "primary_care", scheduledDate: "2025-03-10", scheduledTime: "09:00", status: "completed", confirmedAt: "2025-03-09T14:00:00Z" },
+  { appointmentId: "APT-000002", patientId: "HC-F6R228", locationId: "us-fl-001", serviceType: "specialist", scheduledDate: "2025-03-11", scheduledTime: "11:30", status: "no_show", noShowReason: "Patient did not call" }
 ];
 
-const reclamacionesMock: Reclamacion[] = [
-  { id: 'REC-1', monto: 1500, estado: 'rechazada', pais: 'EEUU', codigosFacturacion: [] },
-  { id: 'REC-2', monto: 800, estado: 'rechazada', pais: 'EEUU', codigosFacturacion: ['A001'] }
-];
-
-// pruebas
-//  si quiere probar en local, correr -> npx tsx src/index.ts
-console.log("Iniciando pruebas de HealthCore...");
-
-console.log("Búsqueda lineal (Sue):", buscarPacientePorNombre(pacientesMock, 'Sue'));
-console.log("Búsqueda binaria (Índice de PAC-003):", buscarIndicePacientePorId(pacientesMock, 'PAC-003'));
-console.log("Validación REC-1 (Sin códigos):", validarReclamacionEEUU(reclamacionesMock[0]));
-console.log("Citas filtradas (no show):", filtrarCitasPorEstado(citasMock, 'no-show'));
-console.log("Tasa de No-Shows (%):", calcularTasaNoShows(citasMock));
-console.log("Pérdidas por rechazos ($):", sumarPerdidasPorRechazos(reclamacionesMock));
+// pruebas 
+console.log("1. Tasa de denegación total (%):", calculateDenialRate(sampleClaims));
+console.log("2. Aseguradoras con alto nivel de rechazo (>8%):", flagHighDenialPayers(sampleClaims, 8));
+console.log("3. Clínicas con exceso de no-shows (>20%):", flagHighNoShowLocations(sampleAppointments, 20));
+console.log("4. Filtrar Claims por aseguradora (BlueCross):", filterClaims(sampleClaims, { payerName: "BlueCross" }).length, "encontrados");
+const validacion = validateClaim(sampleClaims[0], ["us-tx-001", "us-fl-001"]);
+console.log("5. Validación de Claim 01 (Debe ser true):", validacion.valid);
