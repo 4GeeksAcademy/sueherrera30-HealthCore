@@ -1,0 +1,11 @@
+{
+  "name": "healthcore",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.13",
+    "typescript": "^5.0.0"
+  }
+}
