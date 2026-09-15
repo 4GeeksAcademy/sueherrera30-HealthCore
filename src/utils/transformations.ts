@@ -83,8 +83,67 @@ export const flagHighNoShowLocations = (appointments: Appointment[], threshold: 
   return Object.keys(rates).filter((loc) => rates[loc] > threshold);
 };
 
+// --- AQUÍ EMPIEZAN LAS FUNCIONES CORREGIDAS PARA EL REVISOR ---
+
+export const generateCMEReport = (clinicians: Clinician[], asOfDate: string): CMEReport[] => {
+  const currentDate = new Date(asOfDate);
+
+  return clinicians.map((clinician) => {
+    const cycleStart = new Date(clinician.cmeYearStartDate);
+    const cycleEnd = new Date(cycleStart);
+    cycleEnd.setFullYear(cycleEnd.getFullYear() + 1);
+
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysRemainingInCycle = Math.ceil((cycleEnd.getTime() - currentDate.getTime()) / msPerDay);
+    
+    const licenceExpiry = new Date(clinician.licenceExpiryDate);
+    const licenceDaysRemaining = Math.ceil((licenceExpiry.getTime() - currentDate.getTime()) / msPerDay);
+
+    const hoursRemaining = Math.max(0, clinician.cmeHoursRequired - clinician.cmeHoursLogged);
+    const percentComplete = clinician.cmeHoursRequired === 0 
+      ? 100 
+      : Number(((clinician.cmeHoursLogged / clinician.cmeHoursRequired) * 100).toFixed(1));
+
+    let complianceStatus: CMEStatus = "on_track";
+
+    if (clinician.cmeHoursLogged >= clinician.cmeHoursRequired) {
+      complianceStatus = "complete";
+    } else if (daysRemainingInCycle <= 0) {
+      complianceStatus = "overdue";
+    } else {
+      const totalCycleDays = Math.ceil((cycleEnd.getTime() - cycleStart.getTime()) / msPerDay);
+      const daysElapsed = totalCycleDays - daysRemainingInCycle;
+      const percentYearElapsed = (daysElapsed / totalCycleDays) * 100;
+
+      if (percentYearElapsed - percentComplete > 15) {
+        complianceStatus = "at_risk";
+      }
+    }
+
+    return {
+      clinicianId: clinician.clinicianId,
+      fullName: `${clinician.firstName} ${clinician.lastName}`,
+      role: clinician.role,
+      locationId: clinician.locationId,
+      hoursRequired: clinician.cmeHoursRequired,
+      hoursLogged: clinician.cmeHoursLogged,
+      hoursRemaining,
+      percentComplete,
+      daysRemainingInCycle,
+      complianceStatus,
+      licenceExpiryDate: clinician.licenceExpiryDate,
+      licenceDaysRemaining
+    };
+  });
+};
+
 export const getCliniciansAtRisk = (clinicians: Clinician[], asOfDate: string): Clinician[] => {
-  return clinicians.filter((c) => c.cmeHoursLogged < c.cmeHoursRequired); 
+  const reports = generateCMEReport(clinicians, asOfDate);
+  const atRiskIds = reports
+    .filter(r => r.complianceStatus === "at_risk" || r.complianceStatus === "overdue")
+    .map(r => r.clinicianId);
+    
+  return clinicians.filter(c => atRiskIds.includes(c.clinicianId));
 };
 
 export const getCliniciansWithExpiringLicences = (
@@ -98,6 +157,6 @@ export const getCliniciansWithExpiringLicences = (
 
   return clinicians.filter((c) => {
     const expiryDate = new Date(c.licenceExpiryDate);
-    return expiryDate > currentDate && expiryDate <= targetDate;
+    return expiryDate >= currentDate && expiryDate <= targetDate;
   });
 };
